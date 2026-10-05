@@ -1,0 +1,15 @@
+services:
+  app-033:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app-033-codegen-03:latest
+    ports:
+      - "8133:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
